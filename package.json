@@ -1,15 +1,23 @@
 {
   "name": "nextjs13-router-events",
-  "version": "1.0.3",
+  "author": "Steven Linn",
+  "homepage": "https://github.com/stevenlafl",
+  "version": "1.0.4",
   "description": "Provides NextJS 13 router events compatible with the App Router",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/**"
   ],
-  "license": "Apache-2.0",
-  "keywords": [],
-  
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stevenlafl/nextjs13-router-events/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stevenlafl/nextjs13-router-events.git"
+  },
+  "keywords": ["nextjs", "router", "events", "app-router", "nextjs13"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "gts lint",
@@ -19,6 +27,9 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run lint"
+  },
+  "peerDependencies": {
+    "next": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.11.2",

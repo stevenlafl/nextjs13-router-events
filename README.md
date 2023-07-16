@@ -39,3 +39,7 @@ export default function Component(props: any) {
   ...
 }
 ```
+
+## Credits
+
+Inspired by https://github.com/joulev/nextjs13-appdir-router-events
