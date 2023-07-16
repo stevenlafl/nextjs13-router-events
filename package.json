@@ -1,6 +1,6 @@
 {
   "name": "nextjs13-router-events",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Provides NextJS 13 router events compatible with the App Router",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
