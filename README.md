@@ -2,7 +2,13 @@
 
 Provides NextJS 13 router events compatible with the App Router
 
+https://www.npmjs.com/package/nextjs13-router-events?activeTab=readme
+
 ## Usage
+
+```
+npm install nextjs13-router-events
+```
 
 Replace regular NextJS `Link` components with this one:
 ```tsx
