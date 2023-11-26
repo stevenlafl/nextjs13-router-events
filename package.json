@@ -2,7 +2,7 @@
   "name": "nextjs13-router-events",
   "author": "Steven Linn",
   "homepage": "https://github.com/stevenlafl",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Provides NextJS 13 router events compatible with the App Router",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,7 +29,7 @@
     "posttest": "npm run lint"
   },
   "peerDependencies": {
-    "next": "^13.0.0"
+    "next": "^13.0.0 || ^14.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.11.2",
