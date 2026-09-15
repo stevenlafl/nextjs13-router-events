@@ -1,8 +1,10 @@
 "use client";
 
 import NextLink from "next/link";
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef } from "react";
 import { useRouteChangeContext } from "../context/RouteChangeProvider";
+
+type LinkProps = React.ComponentProps<typeof NextLink>;
 
 // https://github.com/vercel/next.js/blob/400ccf7b1c802c94127d8d8e0d5e9bdf9aab270c/packages/next/src/client/link.tsx#L169
 function isModifiedEvent(event: React.MouseEvent): boolean {
@@ -18,24 +20,41 @@ function isModifiedEvent(event: React.MouseEvent): boolean {
   );
 }
 
-const Link = forwardRef<HTMLAnchorElement, React.ComponentProps<"a">>(function Link(
-  { href, onClick, ...rest },
+// Anything with a scheme (https:, mailto:, tel:) or protocol-relative (//host) leaves the app,
+// so it gets a plain anchor. Everything else, including relative paths, goes through next/link.
+function isExternal(href: LinkProps["href"]): href is string {
+  return typeof href === "string" && /^([a-z][a-z0-9+.-]*:|\/\/)/i.test(href);
+}
+
+function hrefToString(href: LinkProps["href"]): string {
+  if (typeof href === "string") return href;
+  return `${href.pathname ?? ""}${href.search ?? ""}${href.hash ?? ""}`;
+}
+
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
+  { href, onClick, as, replace, scroll, shallow, passHref, prefetch, locale, legacyBehavior, ...rest },
   ref,
 ) {
-  const useLink = href && href.startsWith("/");
-  if (!useLink) return <a href={href} onClick={onClick} {...rest} />;
-
   const { onRouteChangeStart } = useRouteChangeContext();
+
+  if (isExternal(href)) return <a href={href} onClick={onClick} ref={ref} {...rest} />;
 
   return (
     <NextLink
       href={href}
+      as={as}
+      replace={replace}
+      scroll={scroll}
+      shallow={shallow}
+      passHref={passHref}
+      prefetch={prefetch}
+      locale={locale}
+      legacyBehavior={legacyBehavior}
       onClick={(event) => {
         if (!isModifiedEvent(event)) {
           const { pathname, search, hash } = window.location;
           const hrefCurrent = `${pathname}${search}${hash}`;
-          const hrefTarget = href as string;
-          if (hrefTarget !== hrefCurrent) {
+          if (hrefToString(href) !== hrefCurrent) {
             onRouteChangeStart();
           }
         }
